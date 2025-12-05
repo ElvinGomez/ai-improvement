@@ -6,7 +6,6 @@ export async function GET(request: NextRequest) {
   const redirectTo = searchParams.get("redirectTo") || "/reports"
   
   const baseUrl = process.env.LOGTO_BASE_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3001"
-  console.log("🚀 ~ route.ts:9 ~ GET ~ baseUrl:", baseUrl)
   
   // Explicitly set the redirectUri to match what's registered in Logto dashboard
   const signInOptions = {

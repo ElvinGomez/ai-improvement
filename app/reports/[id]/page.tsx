@@ -25,7 +25,6 @@ export default function ReportDetailPage() {
   const reportId = params.id as string
 
   const [report, setReport] = useState<Report | null>(null)
-  console.log("🚀 ~ page.tsx:28 ~ ReportDetailPage ~ report:", report)
   const [conversation, setConversation] = useState<Conversation | null>(null)
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(true)
@@ -45,7 +44,6 @@ export default function ReportDetailPage() {
     async function loadReportDetail() {
       try {
         const data = await fetchReportDetail(reportId)
-        console.log("🚀 ~ page.tsx:47 ~ loadReportDetail ~ data:", data)
         setReport(data.report)
         setConversation(data.conversation)
         setMessages(data.messages)
