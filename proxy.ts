@@ -2,11 +2,11 @@ import { logtoEdgeClient } from "@/lib/logto-edge"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Public routes that don't require authentication
-  const publicRoutes = ["/api/logto", "/api/auth", "/unauthorized"]
+  const publicRoutes = ["/api/auth", "/unauthorized"]
   
   // Allow root path (landing page) to be public
   if (pathname === "/" || publicRoutes.some((route) => pathname.startsWith(route))) {
@@ -41,7 +41,7 @@ export default async function middleware(request: NextRequest) {
     }
   } catch (error) {
     // If there's an error checking auth, redirect to sign in
-    console.error("Middleware auth check error:", error)
+    console.error("Proxy auth check error:", error)
     const signInUrl = new URL("/api/auth/sign-in", request.url)
     signInUrl.searchParams.set("redirectTo", pathname)
     return NextResponse.redirect(signInUrl)
